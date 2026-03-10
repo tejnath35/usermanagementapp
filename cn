@@ -1,0 +1,7 @@
+create user
+read all users
+update user
+delete user
+
+
+create user schema 
