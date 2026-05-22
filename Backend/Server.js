@@ -11,10 +11,9 @@ config();
 const app = exp();
 //add cors
 app.use(cors({
-  origin:['http://localhost:5173',
-    'https://usermanagementapp-kappa.vercel.app/'],
-    credentials:true
-}))
+  origin: ['http://localhost:5173', 'https://usermanagementapp-kappa.vercel.app'],
+  credentials: true,
+}));
 // Add body parser middleware
 app.use(exp.json());
 // Forward req to UserAPI if path starts with /user-api
