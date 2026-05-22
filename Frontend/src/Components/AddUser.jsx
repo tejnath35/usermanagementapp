@@ -20,7 +20,7 @@ function AddUser() {
     setLoading(true);
     // make HTTP POST req to create new user
     try {
-      let res = await fetch("https://user-api.onrender.com/user-api/users", {
+      let res = await fetch("http://localhost:4000/user-api/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,9 +47,7 @@ function AddUser() {
     return <p className="text-center text-orange-400 text-3xl"> Loading...</p>;
   }
 
-  if (error) {
-    return <p className="text-center text-red-400 text-3xl"> {error.message}</p>;
-  }
+  // Error is handled inside the form now
 
   return (
     <div className="text-center">
@@ -73,6 +71,7 @@ function AddUser() {
         <button type="submit" className="text-2xl bg-lime-400 text-lime-50 px-8 py-4">
           Add User
         </button>
+        {error && <p className="text-center text-red-500 text-xl mt-4">{error.message}</p>}
       </form>
     </div>
   );
