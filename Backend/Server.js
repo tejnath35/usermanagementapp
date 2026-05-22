@@ -12,7 +12,8 @@ const app = exp();
 //add cors
 app.use(cors({
   origin:['http://localhost:5173',
-    'https://usermanagementapp-kappa.vercel.app/']
+    'https://usermanagementapp-kappa.vercel.app/'],
+    credentials:true
 }))
 // Add body parser middleware
 app.use(exp.json());
