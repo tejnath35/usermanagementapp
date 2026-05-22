@@ -1,0 +1,58 @@
+User Management App — Backend
+
+This folder contains the Express + MongoDB backend for the User Management application.
+
+Quick overview
+- Runtime: Node.js
+- Framework: Express
+- Database: MongoDB (mongoose)
+
+Prerequisites
+- Node.js (v18+ recommended)
+- npm
+- A running MongoDB instance (local or Atlas)
+
+Install & run (local development)
+1. Install dependencies:
+
+	 npm install
+
+2. Create a `.env` file in this folder with the following variables (example):
+
+	 PORT=5000
+	 DB_URL=mongodb://localhost:27017/usermanagement
+
+3. Start the server:
+
+	 node Server.js
+
+The server will read `DB_URL` and `PORT` from the environment and print the port when it starts.
+
+Optional (recommended) development conveniences
+- Run with `nodemon` for automatic restarts during development:
+
+	npx nodemon Server.js
+
+- Add a `start` script to `package.json`:
+
+	"scripts": {
+		"start": "node Server.js"
+	}
+
+Then run:
+
+	npm start
+
+API notes
+- The backend mounts the API router at `/user-api` (see `Server.js`).
+- CORS is configured to allow requests from `http://localhost:5173` (frontend dev server).
+
+Environment & deployment
+- For production, set `DB_URL` to your production MongoDB connection string (for example, MongoDB Atlas).
+- Use a process manager (pm2, systemd) or containerization for production deployments.
+
+Troubleshooting
+- If the server fails to connect to MongoDB, check the `DB_URL` value and network access (IP whitelist for Atlas).
+- Ensure `PORT` is not in use by another process.
+
+
