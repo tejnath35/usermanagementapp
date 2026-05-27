@@ -2,7 +2,10 @@ import exp from "express";
 import { connect } from "mongoose";
 import { config } from "dotenv";
 import { UserApp } from "./Apis/UserAPI.js";
-import cors from 'cors'
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 //Read environment variables
 config();
 
@@ -16,6 +19,11 @@ app.use(cors());
 app.use(exp.json());
 // Forward req to UserAPI if path starts with /user-api
 app.use("/user-api", UserApp);
+
+// Serve static frontend files
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(exp.static(path.join(__dirname, '../Frontend/dist')));
 
 // Connect to DB
 async function connectDB() {
@@ -58,6 +66,11 @@ app.use((err, req, res, next) => {
   res.status(500).json({
     message: "Internal Server Error",
   });
+});
+
+// React Router fallback: serve index.html for unknown non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Frontend/dist/index.html'));
 });
 
 //   // Mongoose validation error
